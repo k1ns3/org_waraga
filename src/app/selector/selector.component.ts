@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import {DateService} from '../shared/date.service';
+import { DateService } from '../shared/date.service';
 
 @Component({
-  selector: 'app-selector',
-  templateUrl: './selector.component.html',
-  styleUrls: ['./selector.component.scss']
+    selector: 'app-selector',
+    templateUrl: './selector.component.html',
+    styleUrls: ['./selector.component.scss']
 })
 export class SelectorComponent {
 
-  constructor(private dateService: DateService) { }
+    constructor(private dateService: DateService) { }
 
-  go(dir: number) {
-    this.dateService.changeMonth(dir)
-  }
+    go(dir: number) {
+        this.dateService.changeMonth(dir)
+    }
 
 }
