@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { DateService } from '../shared/date.service';
+import { Store } from '@ngxs/store';
+import { SelectedDay } from '../organaizer.actions';
 
 interface Day {
     value: moment.Moment
@@ -22,7 +24,8 @@ export class CalendarComponent implements OnInit {
 
     calendar: Week[];
 
-    constructor(private dateService: DateService) {
+    constructor(private dateService: DateService,
+        private store: Store) {
     }
 
     ngOnInit() {
@@ -46,7 +49,6 @@ export class CalendarComponent implements OnInit {
                         const active = moment().isSame(value, 'date')
                         const disabled = !now.isSame(value, 'month')
                         const selected = now.isSame(value, 'date')
-
                         return {
                             value, active, disabled, selected
                         }
@@ -59,6 +61,6 @@ export class CalendarComponent implements OnInit {
 
     select(day: moment.Moment) {
         this.dateService.changeDate(day)
+        this.store.dispatch(new SelectedDay(day));
     }
-
 }

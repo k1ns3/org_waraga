@@ -4,10 +4,9 @@ import {
     SelectedMonth
 } from './organaizer.actions'
 
-interface OrganaizerStateModel { 
-    Day: string;
-    Month: string;
-    Task: any;
+interface OrganaizerStateModel {
+    Day: any;
+    Month: any;
 }
 
 
@@ -15,11 +14,12 @@ interface OrganaizerStateModel {
     name: "Organaizer",
     defaults: {
         Day: '',
-        Month: '',
-        Task: ''
+        Month: ''
     }
 })
 export class OrganaizerState {
-
-
+    @Action(SelectedDay)
+    selectedDay(ctx: StateContext<OrganaizerStateModel>, { payload }: SelectedDay) {
+        ctx.setState((state) => ({ ...state, Day: payload }));
+    }
 }

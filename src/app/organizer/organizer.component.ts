@@ -45,7 +45,7 @@ export class OrganizerComponent implements OnInit {
             title,
             date: this.dateService.date.value.format('DD-MM-YYYY')
         }
-        console.log(task)
+        // console.log(task.date)
 
         this.tasksService.create(task).subscribe(task => {
             this.tasks.push(task)
