@@ -3,3 +3,10 @@ export class SelectedDay {
 
     constructor(public payload: string) { }
 }
+
+
+export class SelectedMonth {
+    static readonly type = '[Month] Change Month';
+
+    constructor(public payload: Array<Object>) { }
+}
