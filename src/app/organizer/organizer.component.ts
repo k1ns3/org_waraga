@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TaskChanges } from '../organaizer.actions';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
+
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { DateService } from '../shared/date.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task, TasksService } from '../shared/tasks.service';
-import { switchMap } from 'rxjs/operators';
-import { stringValidator } from './validators/lat-string';
 
+import { stringValidator } from './validators/lat-string';
+import { OrganaizerState } from '../organaizer.state';
 
 @Component({
     selector: 'app-organizer',
@@ -20,6 +23,9 @@ export class OrganizerComponent implements OnInit {
 
     form: FormGroup
     tasks: Task[] = []
+
+    @Select(OrganaizerState) form$: Observable<any>;
+
 
     constructor(private dateService: DateService,
         private tasksService: TasksService,
@@ -44,7 +50,7 @@ export class OrganizerComponent implements OnInit {
         return control.value && control.errors && control.errors.isInvalidString;
     }
 
-    submit() {
+    onSubmit() {
         const { title } = this.form.value
 
         const task: Task = {

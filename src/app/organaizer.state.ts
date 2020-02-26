@@ -24,7 +24,11 @@ export class OrganaizerState {
     }
 
     @Action(TaskChanges)
-    taskChanges(ctx: StateContext<OrganaizerStateModel>, { payload }: TaskChanges) {
-        ctx.setState((state) => ({ ...state, Task: payload }));
+    taskChanges({ getState, setState }: StateContext<OrganaizerStateModel>, { payload }: TaskChanges) {
+        const state = getState();
+        setState(({
+            ...state,
+            Task: payload
+        }));
     }
 }
