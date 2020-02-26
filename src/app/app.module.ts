@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -30,7 +31,8 @@ import { OrganaizerState } from './organaizer.state'
         HttpClientModule,
         NgxsModule.forRoot([OrganaizerState]),
         NgxsStoragePluginModule.forRoot(),
-        NgxsReduxDevtoolsPluginModule.forRoot()
+        NgxsReduxDevtoolsPluginModule.forRoot(),
+        NgxsFormPluginModule.forRoot()
     ],
     providers: [],
     bootstrap: [AppComponent]
