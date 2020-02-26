@@ -1,12 +1,12 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import {
     SelectedDay,
-    SelectedMonth
+    TaskChanges
 } from './organaizer.actions'
 
 interface OrganaizerStateModel {
     Day: any;
-    Month: any;
+    Task: string;
 }
 
 
@@ -14,12 +14,17 @@ interface OrganaizerStateModel {
     name: "Organaizer",
     defaults: {
         Day: '',
-        Month: ''
+        Task: ''
     }
 })
 export class OrganaizerState {
     @Action(SelectedDay)
     selectedDay(ctx: StateContext<OrganaizerStateModel>, { payload }: SelectedDay) {
         ctx.setState((state) => ({ ...state, Day: payload }));
+    }
+
+    @Action(TaskChanges)
+    taskChanges(ctx: StateContext<OrganaizerStateModel>, { payload }: TaskChanges) {
+        ctx.setState((state) => ({ ...state, Task: payload }));
     }
 }

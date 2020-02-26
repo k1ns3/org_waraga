@@ -5,8 +5,8 @@ export class SelectedDay {
 }
 
 
-export class SelectedMonth {
-    static readonly type = '[Month] Change Month';
+export class TaskChanges {
+    static readonly type = '[Task] Change Task';
 
-    constructor(public payload: any) { }
+    constructor(public payload: string) { }
 }

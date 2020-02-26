@@ -24,9 +24,9 @@
     <footer>
         <form (ngSubmit)="submit()"
               [formGroup]="form">
-            <input type="text"
-                   formControlName="title"
-                   maxlength="30">
+            <input formControlName="title"
+                   maxlength="30"
+                   (input)="onTaskChanges($event.target.value)">
             <div class="error"
                  *ngIf="isControlInvalid('title')">
                 В строке не должно быть английских букв

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
+import { TaskChanges } from '../organaizer.actions';
+import { Store } from '@ngxs/store';
+
 import { DateService } from '../shared/date.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task, TasksService } from '../shared/tasks.service';
 import { switchMap } from 'rxjs/operators';
 import { stringValidator } from './validators/lat-string';
+
 
 @Component({
     selector: 'app-organizer',
@@ -17,7 +22,8 @@ export class OrganizerComponent implements OnInit {
     tasks: Task[] = []
 
     constructor(private dateService: DateService,
-        private tasksService: TasksService) {
+        private tasksService: TasksService,
+        private store: Store) {
         this._pattern = /[a-zA-Z]/g;
 
         this.form = new FormGroup({
@@ -45,7 +51,6 @@ export class OrganizerComponent implements OnInit {
             title,
             date: this.dateService.date.value.format('DD-MM-YYYY')
         }
-        // console.log(task.date)
 
         this.tasksService.create(task).subscribe(task => {
             this.tasks.push(task)
@@ -57,6 +62,10 @@ export class OrganizerComponent implements OnInit {
         this.tasksService.remove(task).subscribe(() => {
             this.tasks = this.tasks.filter(t => t.id !== task.id)
         }, err => console.error(err))
+    }
+
+    onTaskChanges($event) {
+        this.store.dispatch(new TaskChanges($event));
     }
 
 }
