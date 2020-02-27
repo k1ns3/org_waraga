@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MomentPipeModule } from '../shared/moment-pipe.module';
-import { DateService } from '../shared/date.service';
 import { SelectorComponent } from './selector.component';
 import { DateServiceModule } from '../shared/date-service.module';
 
@@ -12,7 +11,6 @@ import { DateServiceModule } from '../shared/date-service.module';
         DateServiceModule
     ],
     declarations: [SelectorComponent],
-    exports: [SelectorComponent],
-    providers: [DateService]
+    exports: [SelectorComponent]
 })
 export class SelectorModule { }

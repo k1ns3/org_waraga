@@ -4,11 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MomentPipeModule } from '../shared/moment-pipe.module';
+import { DateServiceModule } from '../shared/date-service.module';
 
 import { OrganizerComponent } from './organizer.component';
 
-import { DateService } from '../shared/date.service';
 import { TasksService } from '../shared/tasks.service';
+
 
 
 @NgModule({
@@ -17,9 +18,11 @@ import { TasksService } from '../shared/tasks.service';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        MomentPipeModule],
+        MomentPipeModule,
+        DateServiceModule
+    ],
     declarations: [OrganizerComponent],
     exports: [OrganizerComponent],
-    providers: [DateService, TasksService]
+    providers: [TasksService]
 })
 export class OrganizerModule { }

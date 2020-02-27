@@ -9,11 +9,16 @@ import { DateService } from '../shared/date.service';
 import { CalendarService } from './calendar.service';
 
 import { CALENDAR_CONFIG_TOKEN } from './calendar-config-token';
+import { DateServiceModule } from '../shared/date-service.module';
 
 @NgModule({
     declarations: [CalendarComponent],
     exports: [CalendarComponent],
-    imports: [BrowserModule, MomentPipeModule]
+    imports: [
+        BrowserModule,
+        MomentPipeModule,
+        DateServiceModule
+    ]
 })
 export class CalendarRootModule { }
 
@@ -23,7 +28,12 @@ export class CalendarModule {
     static forRoot(config: { a: number, b: number }): ModuleWithProviders {
         return {
             ngModule: CalendarRootModule,
-            providers: [DateService, CalendarService, { provide: CALENDAR_CONFIG_TOKEN, useValue: config }]
+            providers: [DateService,
+                CalendarService,
+                {
+                    provide: CALENDAR_CONFIG_TOKEN,
+                    useValue: config
+                }]
         };
     }
 }
