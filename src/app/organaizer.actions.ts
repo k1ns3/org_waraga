@@ -10,3 +10,10 @@ export class TaskChanges {
 
     constructor(public payload: string) { }
 }
+
+
+// export class Validator {
+//     static readonly type = '[Bool] Validator value';
+
+//     constructor(public payload: boolean) { }
+// }

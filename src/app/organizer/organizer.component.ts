@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-import { TaskChanges } from '../organaizer.actions';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { TaskChanges } from '../organaizer.actions';
+
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+
+import * as moment from 'moment';
 
 import { DateService } from '../shared/date.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -18,31 +20,46 @@ import { OrganaizerState } from '../organaizer.state';
     templateUrl: './organizer.component.html',
     styleUrls: ['./organizer.component.scss']
 })
-export class OrganizerComponent implements OnInit {
+export class OrganizerComponent implements OnInit, OnDestroy {
+    private readonly _destroyStore$: Subject<any>;
     private _pattern: object;
 
     form: FormGroup
     tasks: Task[] = []
 
-    @Select(OrganaizerState) form$: Observable<any>;
+    @Select(OrganaizerState) organaizerState$: Observable<any>;
 
+    constructor(
+        private readonly dateService: DateService,
+        private readonly tasksService: TasksService,
+        private readonly store: Store
+    ) {
+        this._destroyStore$ = new Subject();
 
-    constructor(private dateService: DateService,
-        private tasksService: TasksService,
-        private store: Store) {
         this._pattern = /[a-zA-Z]/g;
 
         this.form = new FormGroup({
             title: new FormControl('', [Validators.required, stringValidator(this._pattern)])
         });
+        this.form.valueChanges.subscribe(v => console.log(v));
     }
 
     ngOnInit() {
-        this.dateService.date.pipe(
-            switchMap(value => this.tasksService.load(value))
-        ).subscribe(tasks => {
-            this.tasks = tasks
-        })
+        this.organaizerState$
+            .pipe(takeUntil(this._destroyStore$))
+            .subscribe(organaizerState => {
+                this.dateService.date.next(moment(organaizerState.Day));
+                this.form.setValue({
+                    title: organaizerState.Task
+                })
+            })
+        this.dateService.date
+            .pipe(switchMap(value => this.tasksService.load(value)))
+            .subscribe(tasks => this.tasks = tasks)
+    }
+
+    ngOnDestroy() {
+        this._destroyStore$.next();
     }
 
     isControlInvalid(controlName: string): boolean {
@@ -73,5 +90,4 @@ export class OrganizerComponent implements OnInit {
     onTaskChanges($event) {
         this.store.dispatch(new TaskChanges($event));
     }
-
 }
