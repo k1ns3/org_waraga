@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { SelectorComponent } from './selector.component';
+import { MomentPipe } from '../shared/moment.pipe';
+import { DateService } from '../shared/date.service';
+import { NgxsModule } from '@ngxs/store';
+import { OrganaizerState } from '../organaizer.state';
 
 
 
@@ -9,7 +13,9 @@ describe('SelectorComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SelectorComponent]
+            imports: [NgxsModule.forRoot([OrganaizerState])],
+            declarations: [SelectorComponent, MomentPipe],
+            providers: [DateService]
         })
     }));
 

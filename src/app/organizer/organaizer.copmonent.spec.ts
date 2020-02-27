@@ -1,6 +1,16 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { OrganizerComponent } from './organizer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxsModule } from '@ngxs/store';
+
+import { OrganizerComponent } from './organizer.component';
+import { MomentPipe } from '../shared/moment.pipe';
+
+import { DateService } from '../shared/date.service';
+import { TasksService } from '../shared/tasks.service';
+
+import { OrganaizerState } from '../organaizer.state';
+import { HttpClientModule } from '@angular/common/http';
 
 
 describe('OrganizerComponent', () => {
@@ -9,7 +19,14 @@ describe('OrganizerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [OrganizerComponent]
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                HttpClientModule,
+                NgxsModule.forRoot([OrganaizerState])
+            ],
+            declarations: [OrganizerComponent, MomentPipe],
+            providers: [DateService, TasksService]
         })
     }));
 
