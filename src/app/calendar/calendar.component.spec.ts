@@ -16,7 +16,7 @@ describe('CalendarComponent', () => {
         TestBed.configureTestingModule({
             imports: [NgxsModule.forRoot([OrganaizerState])],
             declarations: [CalendarComponent, MomentPipe],
-            // providers: [DateService, CalendarService, { provide: CALENDAR_CONFIG_TOKEN, useValue: { a: 1, b: 2 } }]
+            providers: [DateService, CalendarService, { provide: CALENDAR_CONFIG_TOKEN, useValue: { a: 1, b: 2 } }]
         }).compileComponents();
     }));
 
