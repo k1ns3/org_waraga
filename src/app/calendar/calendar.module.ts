@@ -18,7 +18,7 @@ import { CALENDAR_CONFIG_TOKEN } from './calendar-config-token';
     imports: [
         BrowserModule,
         MomentPipeModule,
-        DateServiceModule
+        // DateServiceModule
     ]
 })
 export class CalendarRootModule { }
