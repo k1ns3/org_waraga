@@ -6,7 +6,7 @@ import { TaskChanges } from '../organaizer.actions';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { DateService } from '../shared/date.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -41,14 +41,13 @@ export class OrganizerComponent implements OnInit, OnDestroy {
         this.form = new FormGroup({
             title: new FormControl('', [Validators.required, stringValidator(this._pattern)])
         });
-        this.form.valueChanges.subscribe(v => console.log(v));
     }
 
     ngOnInit() {
         this.organaizerState$
             .pipe(takeUntil(this._destroyStore$))
             .subscribe(organaizerState => {
-                this.dateService.date.next(moment(organaizerState.Day));
+                this.dateService.date.next(moment(organaizerState.Day ? organaizerState.Day : new Date()));
                 this.form.setValue({
                     title: organaizerState.Task
                 })

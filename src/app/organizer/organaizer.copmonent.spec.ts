@@ -27,7 +27,7 @@ describe('OrganizerComponent', () => {
             ],
             declarations: [OrganizerComponent, MomentPipe],
             providers: [DateService, TasksService]
-        })
+        }).compileComponents();
     }));
 
     beforeEach(() => {

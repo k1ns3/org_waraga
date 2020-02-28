@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -14,14 +12,11 @@ import { SelectorModule } from './selector/selector.module';
 
 import { AppComponent } from './app.component';
 
-
-import { OrganaizerState } from './organaizer.state'
+import { OrganaizerState } from './organaizer.state';
 
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         NgxsModule.forRoot([OrganaizerState]),
@@ -30,7 +25,7 @@ import { OrganaizerState } from './organaizer.state'
         NgxsFormPluginModule.forRoot(),
         OrganizerModule,
         SelectorModule,
-        CalendarModule.forRoot({ a: 1, b: 2 })
+        CalendarModule.forRoot({ a: 1, b: 2 }),
     ],
     bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Store } from '@ngxs/store';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { DateService } from '../shared/date.service';
 
@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.calendar =[];
         this.dateService.date.subscribe(this.generate.bind(this));
         this.calendarService.getConfig();
     }
@@ -49,7 +50,7 @@ export class CalendarComponent implements OnInit {
 
         const date = startDay.clone().subtract(1, 'day')
 
-        const calendar = []
+        let calendar = [];
 
         while (date.isBefore(endDay, 'day')) {
             calendar.push({
@@ -66,8 +67,8 @@ export class CalendarComponent implements OnInit {
                     })
             })
         }
-
-        this.calendar = calendar
+        
+        this.calendar = calendar;
     }
 
     select(day: moment.Moment) {
