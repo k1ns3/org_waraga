@@ -6,5 +6,5 @@ export function stringValidator(pattern?: object): ValidatorFn {
         const str = control.value;
 
         return str.match(currentPattern) ? { isInvalidString: true } : null;
-    }
-} 
+    };
+}

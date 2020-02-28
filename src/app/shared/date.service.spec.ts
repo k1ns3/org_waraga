@@ -1,7 +1,7 @@
-import { DateService } from './date.service'
+import { DateService } from './date.service';
 
 describe('Service: DateService', () => {
-    let service: DateService
+    let service: DateService;
 
     beforeEach(() => {
         service = new DateService();

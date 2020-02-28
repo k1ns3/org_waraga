@@ -24,8 +24,8 @@ export class OrganizerComponent implements OnInit, OnDestroy {
     private readonly _destroyStore$: Subject<any>;
     private _pattern: object;
 
-    form: FormGroup
-    tasks: Task[] = []
+    form: FormGroup;
+    tasks: Task[] = [];
 
     @Select(OrganaizerState) organaizerState$: Observable<any>;
 
@@ -50,11 +50,11 @@ export class OrganizerComponent implements OnInit, OnDestroy {
                 this.dateService.date.next(moment(organaizerState.Day ? organaizerState.Day : new Date()));
                 this.form.setValue({
                     title: organaizerState.Task
-                })
-            })
+                });
+            });
         this.dateService.date
             .pipe(switchMap(value => this.tasksService.load(value)))
-            .subscribe(tasks => this.tasks = tasks)
+            .subscribe(tasks => this.tasks = tasks);
     }
 
     ngOnDestroy() {
@@ -67,23 +67,23 @@ export class OrganizerComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-        const { title } = this.form.value
+        const { title } = this.form.value;
 
         const task: Task = {
             title,
             date: this.dateService.date.value.format('DD-MM-YYYY')
-        }
+        };
 
-        this.tasksService.create(task).subscribe(task => {
-            this.tasks.push(task)
-            this.form.reset()
-        }, err => console.error(err))
+        this.tasksService.create(task).subscribe(_task => {
+            this.tasks.push(_task);
+            this.form.reset();
+        }, err => console.error(err));
     }
 
     remove(task: Task) {
         this.tasksService.remove(task).subscribe(() => {
-            this.tasks = this.tasks.filter(t => t.id !== task.id)
-        }, err => console.error(err))
+            this.tasks = this.tasks.filter(t => t.id !== task.id);
+        }, err => console.error(err));
     }
 
     onTaskChanges($event) {

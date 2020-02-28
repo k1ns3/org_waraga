@@ -1,8 +1,8 @@
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, State, StateContext } from '@ngxs/store';
 import {
     SelectedDay,
     TaskChanges
-} from './organaizer.actions'
+} from './organaizer.actions';
 
 interface OrganaizerStateModel {
     Day: any;
@@ -11,7 +11,7 @@ interface OrganaizerStateModel {
 
 
 @State<OrganaizerStateModel>({
-    name: "Organaizer",
+    name: 'Organaizer',
     defaults: {
         Day: '',
         Task: '',

@@ -4,4 +4,4 @@ import { DateService } from './date.service';
 @NgModule({
     providers: [DateService]
 })
-export class DateServiceModule { } 
+export class DateServiceModule { }
