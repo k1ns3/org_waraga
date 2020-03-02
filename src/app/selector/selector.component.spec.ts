@@ -16,7 +16,7 @@ describe('SelectorComponent', () => {
             imports: [NgxsModule.forRoot([OrganaizerState])],
             declarations: [SelectorComponent, MomentPipe],
             providers: [DateService]
-        })
+        }).compileComponents();
     }));
 
     beforeEach(() => {

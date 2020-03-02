@@ -6,7 +6,7 @@ import { TaskChanges } from '../organaizer.actions';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { DateService } from '../shared/date.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,11 +21,14 @@ import { OrganaizerState } from '../organaizer.state';
     styleUrls: ['./organizer.component.scss']
 })
 export class OrganizerComponent implements OnInit, OnDestroy {
+
+    private readonly _destroy$: Subject<any>;
+
     private readonly _destroyStore$: Subject<any>;
     private _pattern: object;
 
-    form: FormGroup
-    tasks: Task[] = []
+    form: FormGroup;
+    tasks: Task[] = [];
 
     @Select(OrganaizerState) organaizerState$: Observable<any>;
 
@@ -41,24 +44,25 @@ export class OrganizerComponent implements OnInit, OnDestroy {
         this.form = new FormGroup({
             title: new FormControl('', [Validators.required, stringValidator(this._pattern)])
         });
-        this.form.valueChanges.subscribe(v => console.log(v));
     }
 
     ngOnInit() {
         this.organaizerState$
             .pipe(takeUntil(this._destroyStore$))
             .subscribe(organaizerState => {
-                this.dateService.date.next(moment(organaizerState.Day));
+                this.dateService.date.next(moment(organaizerState.Day ? organaizerState.Day : new Date()));
                 this.form.setValue({
                     title: organaizerState.Task
-                })
-            })
+                });
+            });
         this.dateService.date
             .pipe(switchMap(value => this.tasksService.load(value)))
-            .subscribe(tasks => this.tasks = tasks)
+            .subscribe(tasks => this.tasks = tasks),
+            takeUntil(this._destroy$);
     }
 
     ngOnDestroy() {
+        this._destroy$.next(true);
         this._destroyStore$.next();
     }
 
@@ -68,23 +72,25 @@ export class OrganizerComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-        const { title } = this.form.value
+        const { title } = this.form.value;
 
         const task: Task = {
             title,
             date: this.dateService.date.value.format('DD-MM-YYYY')
-        }
+        };
 
-        this.tasksService.create(task).subscribe(task => {
-            this.tasks.push(task)
-            this.form.reset()
-        }, err => console.error(err))
+        this.tasksService.create(task)
+            .subscribe(_task => {
+                this.tasks.push(_task);
+                this.form.reset();
+            }, err => console.error(err));
     }
 
     remove(task: Task) {
-        this.tasksService.remove(task).subscribe(() => {
-            this.tasks = this.tasks.filter(t => t.id !== task.id)
-        }, err => console.error(err))
+        this.tasksService.remove(task)
+            .subscribe(() => {
+                this.tasks = this.tasks.filter(t => t.id !== task.id);
+            }, err => console.error(err));
     }
 
     onTaskChanges($event) {

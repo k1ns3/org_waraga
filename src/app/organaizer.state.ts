@@ -1,23 +1,20 @@
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { Action, State, StateContext } from '@ngxs/store';
 import {
     SelectedDay,
-    TaskChanges,
-    // Validator
-} from './organaizer.actions'
+    TaskChanges
+} from './organaizer.actions';
 
 interface OrganaizerStateModel {
     Day: any;
     Task: string;
-    // Valid: boolean;
 }
 
 
 @State<OrganaizerStateModel>({
-    name: "Organaizer",
+    name: 'Organaizer',
     defaults: {
         Day: '',
         Task: '',
-        // Valid: false
     }
 })
 export class OrganaizerState {
@@ -38,13 +35,4 @@ export class OrganaizerState {
             Task: payload
         }));
     }
-
-    // @Action(Validator)
-    // validator({ getState, setState }: StateContext<OrganaizerStateModel>, { payload }: Validator) {
-    //     const state = getState();
-    //     setState(({
-    //         ...state,
-    //         Valid: payload
-    //     }));
-    // }
 }
