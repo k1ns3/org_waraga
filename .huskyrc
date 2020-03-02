@@ -1,5 +1,5 @@
 {
   "hooks": {
-      "pre-push": "ng lint && npm test"
+      "pre-push": "ng lint && npm test -- --coverage"
   }
 }
