@@ -7,7 +7,6 @@ import { DateService } from '../shared/date.service';
 import { SelectedDay } from '../organaizer.actions';
 
 import { CalendarService } from './calendar.service';
-import { CALENDAR_CONFIG_TOKEN } from './calendar-config-token';
 
 interface Day {
     value: moment.Moment;
@@ -30,18 +29,15 @@ export class CalendarComponent implements OnInit {
     calendar: Week[];
 
     constructor(
-        @Inject(CALENDAR_CONFIG_TOKEN) private readonly _config: { a: number, b: number },
         private calendarService: CalendarService,
         private dateService: DateService,
         private store: Store
     ) {
-        console.log(`config`, this._config);
     }
 
     ngOnInit() {
         this.calendar = [];
         this.dateService.date.subscribe(this.generate.bind(this));
-        this.calendarService.getConfig();
     }
 
     generate(now: moment.Moment) {
