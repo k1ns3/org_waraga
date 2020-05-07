@@ -21,7 +21,7 @@ export class TasksService {
     constructor(private http: HttpClient) {
     }
 
-    load(date: moment.Moment): Observable<Task[]> {
+    load(date: moment.Moment): Observable<Task[]> { // загрузка данных
         return this.http
             .get<Task[]>(`${TasksService.url}/${date.format('DD-MM-YYYY')}.json`)
             .pipe(map(tasks => {
@@ -32,7 +32,7 @@ export class TasksService {
             }));
     }
 
-    create(task: Task): Observable<Task> {
+    create(task: Task): Observable<Task> { // создание тасок в таблицу
         return this.http
             .post<CreateResponse>(`${TasksService.url}/${task.date}.json`, task)
             .pipe(map(res => {
@@ -40,7 +40,7 @@ export class TasksService {
             }));
     }
 
-    remove(task: Task): Observable<void> {
+    remove(task: Task): Observable<void> { // удаление
         return this.http
             .delete<void>(`${TasksService.url}/${task.date}/${task.id}.json`);
     }

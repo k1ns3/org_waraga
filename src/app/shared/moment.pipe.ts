@@ -5,7 +5,7 @@ import moment from 'moment';
     name: 'moment',
     pure: false
 })
-export class MomentPipe implements PipeTransform {
+export class MomentPipe implements PipeTransform { //преобразование даты
     transform(m: moment.Moment, format: string = 'MMMM YYYY'): string {
         return m.format(format);
     }

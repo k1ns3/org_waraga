@@ -8,12 +8,12 @@ import { BehaviorSubject } from 'rxjs';
 export class DateService {
     public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
 
-    changeMonth(dir: number) {
+    changeMonth(dir: number) { // смена месяца
         const value = this.date.value.add(dir, 'month');
         this.date.next(value);
     }
 
-    changeDate(date: moment.Moment) {
+    changeDate(date: moment.Moment) { // перестановка даты в календаре
         const value = this.date.value.set({
             date: date.date(),
             month: date.month()
