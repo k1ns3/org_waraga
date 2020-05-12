@@ -16,6 +16,6 @@ describe('Pipe: MomentPipe', () => {
     });
 
     it('should be create', () => {
-        expect(pipe.transform).toBeTruty();
+        expect(pipe.transform).toBeTruthy();
     });
 });
