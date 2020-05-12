@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { MatTableModule } from '@angular/material';
 
 import { MomentPipeModule } from '../shared/moment-pipe.module';
 import { DateServiceModule } from '../shared/date-service.module';
@@ -18,7 +19,8 @@ import { CALENDAR_CONFIG_TOKEN } from './calendar-config-token';
     imports: [
         BrowserModule,
         MomentPipeModule,
-        DateServiceModule
+        DateServiceModule,
+        MatTableModule
     ]
 })
 export class CalendarRootModule { }

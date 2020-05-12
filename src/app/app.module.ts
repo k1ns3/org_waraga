@@ -13,6 +13,7 @@ import { SelectorModule } from './selector/selector.module';
 import { AppComponent } from './app.component';
 
 import { OrganaizerState } from './organaizer.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { OrganaizerState } from './organaizer.state';
         OrganizerModule,
         SelectorModule,
         CalendarModule.forRoot({ a: 1, b: 2 }),
+        BrowserAnimationsModule,
     ],
     bootstrap: [AppComponent]
 })

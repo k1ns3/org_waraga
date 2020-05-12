@@ -1,9 +1,14 @@
 <p>
-  <i class="material-icons" (click)="go(-1)">arrow_left</i> <!-- Иконка влево-->
 
-  <span>
-    {{ dateService.date | async | moment }} <!-- Вывод даты -->
-  </span>
+    <i class="material-icons"
+       (click)="go(-1)">arrow_left</i> 
 
-  <i class="material-icons" (click)="go(1)">arrow_right</i> <!-- Иконка вправо-->
+
+    <span>
+        {{ dateService.date | async | moment }}
+    </span>
+
+
+    <i class="material-icons"
+       (click)="go(1)">arrow_right</i>
 </p>
