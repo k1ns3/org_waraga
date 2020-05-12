@@ -1,6 +1,6 @@
 <section>
     <header>
-        Organizer: <strong>{{dateService.date | async | moment:'DD/MM/YYYY'}}</strong>
+        Задачи на: <strong>{{dateService.date | async | moment:'DD/MM/YYYY'}}</strong>
         <hr />
     </header>
 
@@ -13,11 +13,11 @@
                     {{task.title}}
                 </span>
                 <button class="btn btn-primary"
-                        (click)="remove(task)">Remove</button>
+                        (click)="remove(task)">Удалить</button>
             </li>
         </ul>
         <ng-template #noTasks>
-            <p class="text-center">No tasks yet...</p>
+            <p class="text-center">Задач пока нет...</p>
         </ng-template>
     </main>
 
@@ -33,7 +33,7 @@
             </div>
             <button type="submit"
                     class="btn btn-primary btn-block"
-                    [disabled]="form.invalid">Add</button>
+                    [disabled]="form.invalid">Добавить</button>
         </form>
     </footer>
 </section>
