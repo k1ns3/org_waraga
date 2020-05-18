@@ -33,9 +33,9 @@ export class OrganizerComponent implements OnInit, OnDestroy {
     @Select(OrganaizerState) organaizerState$: Observable<any>;
 
     constructor(
-        private readonly dateService: DateService,
         private readonly tasksService: TasksService,
-        private readonly store: Store
+        private readonly store: Store,
+        public readonly dateService: DateService,
     ) {
         this._destroyStore$ = new Subject();
 
