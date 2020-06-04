@@ -17,7 +17,15 @@ import { AppComponent } from './app.component';
 import { OrganaizerState } from './organaizer.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewappComponent } from './viewapp/viewapp.component';
-import { MatButtonModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatTableModule, MatDividerModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCardModule,
+    MatTableModule,
+    MatDividerModule
+} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
