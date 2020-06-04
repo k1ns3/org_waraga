@@ -62,7 +62,7 @@ export class OrganizerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._destroy$.next(true);
+        // this._destroy$.next(true);
         this._destroyStore$.next();
     }
 
